@@ -10,6 +10,8 @@ gameStarted = false
 gamePaused = false
 shouldQuit = false
 
+score = 0
+
 snakeBits = {}
 
 startGameButton = {
@@ -56,6 +58,7 @@ function love.load()
 end
 
 function setupGame()
+    score = 0
     x = 16
     y = 12
     direction = 0
@@ -124,6 +127,7 @@ function love.update(dt)
                     apples[i].x = math.floor(love.math.random()*32)
                     apples[i].y = math.floor(love.math.random()*24)
                     lengthOfTick = lengthOfTick * tickMultiplicationPerApple
+                    score = score + 100
                 end
             end
             tickTime = 0
@@ -154,6 +158,10 @@ function love.draw()
             end
             love.graphics.print(button.text, 100, i*20 + 50)
         end
+    end
+    if gamePaused then
+        love.graphics.setColor(1, 1, 1)
+        love.graphics.print(string.format("Score: %d", score), 115, 30)
     end
 end
 
