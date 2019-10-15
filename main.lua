@@ -2,12 +2,14 @@ x = 0
 y = 0
 
 direction = 0
+directionLastTick = 0
 lengthOfTick = 0.5
 tickMultiplicationPerApple = 0.985
 tickTime = 0
 tileSize = 10
 gameStarted = false
 gamePaused = false
+playerDead = false
 shouldQuit = false
 
 score = 0
@@ -58,6 +60,7 @@ function love.load()
 end
 
 function setupGame()
+    playerDead = false
     score = 0
     x = 16
     y = 12
@@ -91,6 +94,7 @@ function love.update(dt)
     if gameStarted == true and gamePaused == false then
         tickTime = tickTime + dt
         if tickTime > lengthOfTick then
+            directionLastTick = direction
             for i = #snakeBits, 2, -1 do
                 snakeBits[i].x = snakeBits[i-1].x
                 snakeBits[i].y = snakeBits[i-1].y
@@ -114,6 +118,7 @@ function love.update(dt)
             for i = 2, #snakeBits do
                 if snakeBits[i].x == x and snakeBits[i].y == y then
                     gameStarted = false
+                    playerDead = true
                     return
                 end
             end
@@ -159,7 +164,7 @@ function love.draw()
             love.graphics.print(button.text, 100, i*20 + 50)
         end
     end
-    if gamePaused then
+    if gamePaused or playerDead then
         love.graphics.setColor(1, 1, 1)
         love.graphics.print(string.format("Score: %d", score), 115, 30)
     end
@@ -168,13 +173,16 @@ end
 function love.keypressed( key )
     if gameStarted and not gamePaused then
         if key == "up" then
-            if direction ~= 1 then direction = 0 end
-        elseif key == "down" then
-            if direction ~= 0 then direction = 1 end
-        elseif key == "left" then
-            if direction ~= 3 then direction = 2 end
-        elseif key == "right" then
-            if direction ~= 2 then direction = 3 end
+            if directionLastTick ~= 1 then direction = 0 end
+        end
+        if key == "down" then
+            if directionLastTick ~= 0 then direction = 1 end
+        end
+        if key == "left" then
+            if directionLastTick ~= 3 then direction = 2 end
+        end
+        if key == "right" then
+            if directionLastTick ~= 2 then direction = 3 end
         end
     else
         if key == "up" then
