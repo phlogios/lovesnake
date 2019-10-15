@@ -3,6 +3,7 @@ y = 0
 
 direction = 0
 lengthOfTick = 0.5
+tickMultiplicationPerApple = 0.985
 tickTime = 0
 tileSize = 10
 gameStarted = false
@@ -58,6 +59,8 @@ function setupGame()
     x = 16
     y = 12
     direction = 0
+    lengthOfTick = 0.5
+    tickTime = 0
     snakeBits = {
         {
             x = 16,
@@ -120,6 +123,7 @@ function love.update(dt)
                     })
                     apples[i].x = math.floor(love.math.random()*32)
                     apples[i].y = math.floor(love.math.random()*24)
+                    lengthOfTick = lengthOfTick * tickMultiplicationPerApple
                 end
             end
             tickTime = 0
@@ -156,13 +160,13 @@ end
 function love.keypressed( key )
     if gameStarted and not gamePaused then
         if key == "up" then
-            direction = 0
+            if direction ~= 1 then direction = 0 end
         elseif key == "down" then
-            direction = 1
+            if direction ~= 0 then direction = 1 end
         elseif key == "left" then
-            direction = 2
+            if direction ~= 3 then direction = 2 end
         elseif key == "right" then
-            direction = 3
+            if direction ~= 2 then direction = 3 end
         end
     else
         if key == "up" then
