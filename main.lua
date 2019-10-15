@@ -198,9 +198,3 @@ function love.keypressed( key )
         }
     end
  end
-  
- function love.keyreleased( key )
-    if key == "down" then
-       
-    end
- end
