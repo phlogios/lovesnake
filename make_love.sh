@@ -13,7 +13,7 @@ Exec=love ./
 Terminal=false
 Type=Application
 StartupNotify=true
-Icon=lovesnake.png
+Icon=lovesnake
 Categories=games;
 EOF
 
