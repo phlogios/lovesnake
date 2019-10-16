@@ -17,7 +17,7 @@ Icon=lovesnake.png
 Categories=games;
 EOF
 
-FLIST="lovesnake.png conf.lua main.lua default.gcw0.desktop"
+FLIST="lovesnake.png Resource-Imagefont.png conf.lua main.lua default.gcw0.desktop"
 
 # create opk
 
