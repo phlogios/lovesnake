@@ -112,7 +112,7 @@ function love.update(dt)
             end
             if x > 31 then x = 0 end
             if x < 0 then x = 31 end
-            if y > 24 then y = 0 end
+            if y > 23 then y = 0 end
             if y < 0 then y = 23 end
             
             for i = 2, #snakeBits do
