@@ -1,0 +1,9 @@
+[Desktop Entry]
+Name=LoveSnake
+Comment=Snake in Love
+Exec=love ./
+Terminal=false
+Type=Application
+StartupNotify=true
+Icon=lovesnake
+Categories=games;
