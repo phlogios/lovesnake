@@ -155,18 +155,23 @@ function love.draw()
     end
     love.graphics.setFont(font)
     if not gameStarted or gamePaused then
+        love.graphics.setColor(255, 255, 255, 0.2)
+        love.graphics.rectangle("fill", 0, 0, 320, 240)
         for i, button in ipairs(menuButtons) do
             if menuCursor == i then
                 love.graphics.setColor(0, 255, 0)
             else
                 love.graphics.setColor(255, 255, 255)
             end
-            love.graphics.print(button.text, 100, i*20 + 50)
+            love.graphics.print(button.text, 110, i*20 + 50)
         end
+        love.graphics.setColor(255, 255, 255)
+        love.graphics.print("www.phlogios.com", 90, 200)
+        love.graphics.print("Twitter: @phlogios", 85, 220)
     end
     if gamePaused or playerDead then
         love.graphics.setColor(255, 255, 255)
-        love.graphics.print(string.format("Score: %d", score), 115, 30)
+        love.graphics.print(string.format("Score: %d", score), 110, 30)
     end
 end
 
