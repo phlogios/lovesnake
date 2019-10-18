@@ -192,7 +192,7 @@ function love.keypressed( key )
         end
     end
     
-    if key == "space" or key == "return" then
+    if (key == "space" or key == "return") and (gamePaused == true or gameStarted == false) then
         menuButtons[menuCursor]:action()
     end
 
