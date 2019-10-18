@@ -142,13 +142,13 @@ end
 
 function love.draw()
     if gameStarted then
-        love.graphics.setColor(1, 1, 1)
+        love.graphics.setColor(255, 255, 255)
         love.graphics.rectangle("fill", x * tileSize, y * tileSize, tileSize, tileSize)
         for i, bit in ipairs(snakeBits) do
             love.graphics.rectangle("fill", bit.x*tileSize, bit.y*tileSize, tileSize, tileSize)
         end
         
-        love.graphics.setColor(1, 0, 0)
+        love.graphics.setColor(255, 0, 0)
         for i = 1, #apples do
             love.graphics.rectangle("fill", apples[i].x*tileSize, apples[i].y*tileSize, tileSize, tileSize)
         end
@@ -157,15 +157,15 @@ function love.draw()
     if not gameStarted or gamePaused then
         for i, button in ipairs(menuButtons) do
             if menuCursor == i then
-                love.graphics.setColor(0, 1, 0)
+                love.graphics.setColor(0, 255, 0)
             else
-                love.graphics.setColor(1, 1, 1)
+                love.graphics.setColor(255, 255, 255)
             end
             love.graphics.print(button.text, 100, i*20 + 50)
         end
     end
     if gamePaused or playerDead then
-        love.graphics.setColor(1, 1, 1)
+        love.graphics.setColor(255, 255, 255)
         love.graphics.print(string.format("Score: %d", score), 115, 30)
     end
 end
