@@ -2,15 +2,16 @@ snakeheadImg = love.graphics.newImage("snakehead.png")
 snakebodyImg = love.graphics.newImage("snakebody-sheet.png")
 snaketailImg = love.graphics.newImage("snaketail.png")
 snakecornerImg = love.graphics.newImage("snakecorner.png")
+appleImg = love.graphics.newImage("apple.png")
 headQuads = {
     love.graphics.newQuad(0, 0, 16, 16, snakeheadImg:getDimensions()),
     love.graphics.newQuad(16, 0, 16, 16, snakeheadImg:getDimensions())
 }
 bodyQuads = {
     love.graphics.newQuad(0, 0, 16, 16, snakebodyImg:getDimensions()),
-    love.graphics.newQuad(16, 0, 16, 16, snakebodyImg:getDimensions()),
+    --love.graphics.newQuad(16, 0, 16, 16, snakebodyImg:getDimensions()),
     love.graphics.newQuad(32, 0, 16, 16, snakebodyImg:getDimensions()),
-    love.graphics.newQuad(48, 0, 16, 16, snakebodyImg:getDimensions()),
+    --love.graphics.newQuad(48, 0, 16, 16, snakebodyImg:getDimensions()),
 }
 tailQuads = {
     love.graphics.newQuad(0, 0, 16, 16, snaketailImg:getDimensions()),
@@ -24,6 +25,7 @@ cornerQuads = {
     love.graphics.newQuad(32, 0, 16, 16, snakecornerImg:getDimensions()),
     love.graphics.newQuad(48, 0, 16, 16, snakecornerImg:getDimensions()),
 }
+appleQuad = love.graphics.newQuad(0, 0, 16, 16, appleImg:getDimensions());
 
 tileWidth = 16
 tileHeight = 16
@@ -209,9 +211,8 @@ function love.draw()
         love.graphics.draw(snaketailImg, tailQuads[tickAccumulator % #tailQuads + 1], (snakeBits[#snakeBits].x * tileWidth)+tileWidth/2, (snakeBits[#snakeBits].y * tileHeight)+tileHeight/2, (math.pi/2)*snakeBits[#snakeBits-1].directionLastTick, 1, 1, 8, 8)
         love.graphics.draw(snakeheadImg, headQuads[tickAccumulator % #headQuads + 1], (snakeBits[1].x * tileWidth)+tileWidth/2, (snakeBits[1].y * tileHeight)+tileHeight/2, (math.pi/2)*snakeBits[1].directionLastTick, 1, 1, 8, 8)
         
-        love.graphics.setColor(255, 0, 0)
         for i = 1, #apples do
-            love.graphics.rectangle("fill", apples[i].x*tileWidth, apples[i].y*tileHeight, tileWidth, tileHeight)
+            love.graphics.draw(appleImg, appleQuad, (apples[i].x * tileWidth)+tileWidth/2, (apples[i].y * tileHeight)+tileHeight/2, 0, 1, 1, 8, 8)
         end
     end
     love.graphics.setFont(font)
