@@ -4,7 +4,7 @@ OPK_NAME=${NAME}.opk
 
 echo ${OPK_NAME}
 
-FLIST="lovesnake.png Resource-Imagefont.png conf.lua main.lua default.gcw0.desktop"
+FLIST="./*"
 
 # create opk
 

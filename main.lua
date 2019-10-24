@@ -42,7 +42,6 @@ playerDead = false
 shouldQuit = false
 twoPlayer = false
 winner = 0
-
 score = 0
 
 startGameButton = {
@@ -93,6 +92,8 @@ visibleMenuButtons = {}
 menuCursor = 1
 
 function love.load()
+    popSound = love.audio.newSource("pop.ogg", "static")
+    deathSound = love.audio.newSource("impactsplat03.ogg", "static")
     font = love.graphics.newImageFont("Resource-Imagefont.png",
     " abcdefghijklmnopqrstuvwxyz" ..
     "ABCDEFGHIJKLMNOPQRSTUVWXYZ0" ..
@@ -259,6 +260,7 @@ function love.update(dt)
                                     quitButton
                                 }
                             end
+                            deathSound:play()
                             return
                         end
                     end
@@ -272,6 +274,7 @@ function love.update(dt)
                         apples[i].y = math.floor(love.math.random()*tilesY)
                         lengthOfTick = lengthOfTick * tickMultiplicationPerApple
                         score = score + 100
+                        popSound:play()
                     end
                 end
                 tickTime = 0
@@ -310,23 +313,23 @@ function love.draw()
             else
                 love.graphics.setColor(255, 255, 255)
             end
-            love.graphics.print(button.text, 110, i*20 + 50)
+            love.graphics.print(button.text, 100, i*20 + 50)
         end
         love.graphics.setColor(255, 255, 255)
-        love.graphics.print("www.phlogios.com", 90, 200)
-        love.graphics.print("Twitter: @phlogios", 85, 220)
+        love.graphics.print("www.phlogios.com", 80, 200)
+        love.graphics.print("Twitter: @phlogios", 75, 220)
     end
     if (gamePaused or playerDead) and twoPlayer == false then
         love.graphics.setColor(255, 255, 255)
-        love.graphics.print(string.format("Score: %d", score), 110, 30)
+        love.graphics.print(string.format("Score: %d", score), 100, 30)
     end
     if winner > 0 then
         love.graphics.setColor(snakes[winner].color)
-        love.graphics.print(string.format("Player %d wins!", winner), 110, 30)
+        love.graphics.print(string.format("Player %d wins!", winner), 100, 30)
     end
     if winner == -1 then
         love.graphics.setColor(255, 255, 255)
-        love.graphics.print("It's a tie!", 110, 30)
+        love.graphics.print("It's a tie!", 100, 30)
     end
 end
 
@@ -346,16 +349,16 @@ function love.keypressed( key )
         end
 
         if twoPlayer then
-            if key == "lshift" then
+            if key == " " or key == "w" then
                 if snakes[2].snakeBits[1].directionLastTick ~= 2 then snakes[2].direction = 0 end
             end
-            if key == "lalt" then
+            if key == "lalt" or key == "s" then
                 if snakes[2].snakeBits[1].directionLastTick ~= 0 then snakes[2].direction = 2 end
             end
-            if key == "space" then
+            if key == "lshift" or key == "a" then
                 if snakes[2].snakeBits[1].directionLastTick ~= 1 then snakes[2].direction = 3 end
             end
-            if key == "lctrl" then
+            if key == "lctrl" or key == "d" then
                 if snakes[2].snakeBits[1].directionLastTick ~= 3 then snakes[2].direction = 1 end
             end
         end
